@@ -1,375 +1,230 @@
-# 🏅 Olympic Analytics — Dashboard Power BI
+# 🏅 Projeto Power BI — Olimpíadas
 
-## 📌 Visão Geral
+Dashboard analítico completo desenvolvido no Power BI utilizando dados históricos das Olimpíadas, aplicando ETL, modelagem dimensional, DAX, storytelling e visualizações executivas.
 
-O projeto **Olympic Analytics** é um dashboard analítico desenvolvido no Power BI com foco na exploração histórica dos Jogos Olímpicos modernos.
+---
 
-O objetivo principal é transformar dados históricos olímpicos em informações estratégicas, visuais e interativas, permitindo análises sobre:
+# 📊 Objetivo do Projeto
 
-* desempenho de países
-* evolução das Olimpíadas
-* atletas históricos
-* modalidades esportivas
-* distribuição de medalhas
-* participação feminina
-* cidades-sede
-* tendências históricas
+Este projeto tem como objetivo transformar dados históricos olímpicos em insights analíticos através de um dashboard profissional no Power BI.
 
-O dashboard foi construído utilizando técnicas modernas de:
+O projeto foi desenvolvido aplicando conceitos de:
 
-* Business Intelligence (BI)
-* Data Visualization
-* Data Storytelling
-* Modelagem Dimensional
-* DAX
+* ETL
 * Power Query
-
----
-
-# 🎯 Objetivos do Projeto
-
-* Construir um dashboard profissional e interativo no Power BI
-* Aplicar conceitos de modelagem de dados
-* Criar visualizações estratégicas e executivas
-* Desenvolver métricas analíticas relevantes
-* Gerar insights históricos sobre os Jogos Olímpicos
-* Trabalhar com tratamento e transformação de dados reais
-
----
-
-# 📊 Dataset Utilizado
-
-## Dataset Principal
-
-Olympic Athletes Historical Dataset
-
-### Informações do Dataset
-
-* Mais de 270 mil registros
-* Dados históricos dos Jogos Olímpicos
-* Cobertura de 1896 até 2016/2020
-* Summer Olympics e Winter Olympics
-* Dados de atletas, países, esportes e medalhas
-
----
-
-# 🧱 Estrutura dos Dados
-
-Cada linha do dataset representa:
-
-> Um atleta participando de um evento olímpico específico.
-
----
-
-# 📁 Colunas Disponíveis
-
-| Coluna | Descrição               |
-| ------ | ----------------------- |
-| ID     | Identificador do atleta |
-| Name   | Nome do atleta          |
-| Gender | Gênero                  |
-| Age    | Idade                   |
-| Height | Altura                  |
-| Weight | Peso                    |
-| Team   | País/Equipe             |
-| NOC    | Código Olímpico do país |
-| Games  | Nome da edição olímpica |
-| Year   | Ano                     |
-| Season | Summer ou Winter        |
-| City   | Cidade-sede             |
-| Sport  | Modalidade esportiva    |
-| Event  | Evento esportivo        |
-| Medal  | Medalha conquistada     |
-
----
-
-# 🧹 Tratamento de Dados
-
-O projeto utiliza Power Query para:
-
-* limpeza de dados
-* tradução de colunas
-* substituição de valores
-* tratamento de nulos
-* padronização
-* filtragem de registros
-* transformação de tipos de dados
-
----
-
-# 🌎 Traduções Aplicadas
-
-| Inglês | Português |
-| ------ | --------- |
-| Name   | Atleta    |
-| Gender | Gênero    |
-| Age    | Idade     |
-| Height | Altura    |
-| Weight | Peso      |
-| Team   | País      |
-| Games  | Jogos     |
-| Year   | Ano       |
-| Season | Temporada |
-| City   | Cidade    |
-| Sport  | Esporte   |
-| Event  | Evento    |
-| Medal  | Medalha   |
-
----
-
-# 🔧 Tratamentos Importantes
-
-## Medalhas Nulas
-
-Valores nulos na coluna Medal foram tratados como:
-
-```text
-Sem Medalha
-```
-
----
-
-## Filtro Principal
-
-O dashboard utiliza prioritariamente:
-
-```text
-Summer Olympics
-```
-
-para manter:
-
-* consistência visual
-* clareza analítica
-* melhor storytelling
-
----
-
-# ⭐ Modelagem de Dados
-
-O projeto utiliza modelo dimensional do tipo:
-
-## Star Schema (Modelo Estrela)
-
-### Tabela Fato
-
-* Participações Olímpicas
-
-### Dimensões
-
-* Atletas
-* Países
-* Esportes
-* Tempo
-* Medalhas
-* Cidades
-
----
-
-# 📈 Funcionalidades do Dashboard
-
-## ✅ Página Overview
-
-Visão executiva geral das Olimpíadas.
-
-### Recursos:
-
+* Modelagem Estrela
+* DAX
 * KPIs
-* mapa mundial
-* evolução histórica
-* ranking de países
-* filtros globais
+* Storytelling Analítico
+* UX/UI para Dashboards
+* Visualização de Dados
 
 ---
 
-## ✅ Página Países
+# 🚀 Tecnologias Utilizadas
 
-Análise de desempenho entre nações.
-
-### Recursos:
-
-* ranking histórico
-* medalhas por país
-* comparação entre países
-* participação olímpica
-* evolução temporal
-
----
-
-## ✅ Página Atletas
-
-Exploração individual dos atletas.
-
-### Recursos:
-
-* atletas mais medalhistas
-* distribuição de idade
-* gênero
-* esportes praticados
-* participação histórica
+| Tecnologia       | Finalidade                |
+| ---------------- | ------------------------- |
+| Power BI         | Dashboard e visualizações |
+| Power Query      | ETL e transformação       |
+| DAX              | Métricas e KPIs           |
+| GitHub           | Versionamento             |
+| GitHub Projects  | Gestão Kanban             |
+| Power BI Service | Publicação                |
 
 ---
 
-## ✅ Página Modalidades
+# 📁 Estrutura do Projeto
 
-Análise esportiva das Olimpíadas.
-
-### Recursos:
-
-* esportes mais populares
-* eventos olímpicos
-* distribuição de medalhas
-* crescimento das modalidades
+```text id="0b9m1f"
+/dataset
+/powerbi
+/imagens
+README.md
+```
 
 ---
 
-## ✅ Página História Olímpica
+# ⚙️ ETL — Power Query
 
-Evolução histórica das Olimpíadas.
+Durante o processo de ETL foram realizadas:
 
-### Recursos:
-
-* cidades-sede
-* linha do tempo
-* evolução de participação
-* expansão olímpica
-
----
-
-# 📊 Indicadores (KPIs)
-
-O dashboard possui indicadores estratégicos como:
-
-* Total de atletas
-* Total de países
-* Total de esportes
-* Total de medalhas
-* Medalhas de ouro
-* Participações olímpicas
-* País líder histórico
-* Crescimento da participação feminina
+* Remoção de tipagem automática
+* Limpeza textual
+* Padronização de países
+* Tratamento de valores nulos
+* Correção de inconsistências
+* Criação de colunas derivadas
+* Ajuste de tipos de dados
 
 ---
 
-# 📉 Visualizações Utilizadas
+# 🏗️ Modelagem Dimensional
 
-| Visual       | Objetivo                |
-| ------------ | ----------------------- |
-| Cards KPI    | métricas rápidas        |
-| Bar Chart    | rankings                |
-| Line Chart   | evolução temporal       |
-| Map          | distribuição geográfica |
-| Treemap      | modalidades             |
-| Donut Chart  | proporções              |
-| Matrix       | análise detalhada       |
-| Scatter Plot | correlações             |
-| Slicers      | filtros interativos     |
+O projeto foi estruturado utilizando modelo estrela.
 
----
+## Tabela Fato
 
-# 🎨 Design e UX
+* Fato_Olimpiadas
 
-O dashboard segue princípios modernos de UI/UX:
+## Tabelas Dimensão
 
-* layout limpo
-* design minimalista
-* hierarquia visual
-* cores padronizadas
-* navegação intuitiva
-* experiência responsiva
+* Dim_Atleta
+* Dim_Pais
+* Dim_Esporte
+* Dim_Tempo
+* Dim_Localizacao
 
 ---
 
-# 🧠 Insights Possíveis
-
-O dashboard permite responder perguntas como:
-
-* Quais países dominaram historicamente as Olimpíadas?
-* Qual esporte possui mais medalhas?
-* A participação feminina aumentou ao longo do tempo?
-* Quais cidades mais sediaram os jogos?
-* Existe relação entre participação e quantidade de medalhas?
-* Quais atletas possuem mais conquistas?
-
----
-
-# ⚡ Recursos Avançados
-
-## Implementados ou planejados:
-
-* Drillthrough
-* Tooltips customizados
-* Bookmarks
-* Navegação entre páginas
-* Interatividade avançada
-* Medidas DAX
-* Segmentações dinâmicas
-
----
-
-# 🧮 Medidas DAX Planejadas
+# 📊 KPIs Desenvolvidos
 
 * Total Medalhas
 * Total Ouro
-* Ranking País
-* Medalhas por Esporte
-* Participação Feminina %
-* Crescimento Histórico
-* Medalhas por Ano
+* Total Prata
+* Total Bronze
 * Total Atletas
-* País Líder
+* Média de Idade
+* Percentual Feminino
+* Total de Países
+* Eficiência Olímpica
 
 ---
 
-# 🛠️ Tecnologias Utilizadas
+# 📄 Estrutura do Dashboard
 
-| Ferramenta  | Uso              |
-| ----------- | ---------------- |
-| Power BI    | Dashboard        |
-| Power Query | ETL              |
-| DAX         | Métricas         |
-| Excel/CSV   | Fonte de dados   |
-| Figma       | Protótipo visual |
+## Página 1 — Dashboard Executivo
 
----
+* KPIs gerais
+* Evolução olímpica
+* Medalhas por tipo
+* Participação feminina
 
-# 📌 Diferenciais do Projeto
+## Página 2 — Países e Medalhas
 
-* Dataset histórico real
-* Grande volume de dados
-* Dashboard interativo
-* Storytelling analítico
-* Visual profissional
-* Estrutura corporativa
-* Aplicação de BI moderno
+* Ranking olímpico
+* Top 10 países
+* Mapa mundial
+* Eficiência olímpica
 
----
+## Página 3 — Atletas
 
-# 🚀 Objetivo Acadêmico
+* Altura x Peso
+* Média idade por esporte
+* Faixa etária
+* Top atletas
 
-Este projeto foi desenvolvido com foco educacional e profissional, visando aplicar conceitos de:
+## Página 4 — Análise Feminina
 
-* Business Intelligence
-* Data Analytics
-* Visualização de Dados
-* UX para dashboards
-* Análise histórica esportiva
+* Evolução feminina
+* Medalhas femininas
+* Participação por país
 
----
+## Página 5 — Storytelling Olímpico
 
-# 👥 Equipe
-
-Projeto desenvolvido em dupla para a disciplina de Business Intelligence / Power BI.
+* Dominância dos EUA
+* Crescimento feminino
+* Evolução histórica
+* Esportes dominantes
 
 ---
 
-# 🏁 Resultado Esperado
+# 🎨 Recursos Avançados
 
-Um dashboard profissional capaz de:
-
-* apresentar dados históricos olímpicos
-* gerar insights relevantes
-* facilitar análises estratégicas
-* demonstrar domínio técnico em Power BI
+* Segmentadores dinâmicos
+* Tooltips personalizados
+* Drill Through
+* Navegação entre páginas
+* UX/UI executivo
 
 ---
+
+# 📖 Storytelling Analítico
+
+O dashboard foi construído para responder perguntas estratégicas como:
+
+* Quais países dominaram historicamente as Olimpíadas?
+* Como evoluiu a participação feminina?
+* Quais esportes possuem maior relevância histórica?
+* Quais países possuem maior eficiência olímpica?
+
+---
+
+# 🧠 Principais Aprendizados
+
+Este projeto permitiu aprofundar conhecimentos em:
+
+* ETL profissional
+* Governança de dados
+* Modelagem dimensional
+* Performance em DAX
+* Storytelling com dados
+* UX aplicada a dashboards
+* Estruturação de projetos analíticos
+
+---
+
+# 🌐 Publicação
+
+## Power BI Service
+
+Adicionar link após publicação:
+
+```text id="7n3vkd"
+[LINK_POWER_BI]
+```
+
+---
+
+# 📸 Preview
+
+Adicionar screenshots do dashboard na pasta:
+
+```text id="u4m8qx"
+/imagens
+```
+
+---
+
+# 📌 Como Executar o Projeto
+
+## 1. Clonar Repositório
+
+```bash id="g5r2yf"
+git clone [URL_REPOSITORIO]
+```
+
+## 2. Abrir Arquivo Power BI
+
+Abrir o arquivo `.pbix` localizado em:
+
+```text id="e1x7mc"
+/powerbi
+```
+
+## 3. Atualizar Dataset
+
+Caso necessário:
+
+* Atualizar caminho do CSV
+* Atualizar credenciais
+* Aplicar atualizações
+
+---
+
+# 🏁 Resultado Final
+
+✅ Dashboard profissional
+✅ ETL completo
+✅ Modelo estrela
+✅ KPIs executivos
+✅ Storytelling analítico
+✅ Navegação dinâmica
+✅ Projeto para portfólio
+
+---
+
+# 👨‍💻 Autores
+
+Alex Miller e Gabriel Celestino 
+

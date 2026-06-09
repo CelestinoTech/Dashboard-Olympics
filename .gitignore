@@ -1,0 +1,611 @@
+# 🏅 PROJETO POWER BI — OLIMPÍADAS
+
+# 📊 TUTORIAL COMPLETO — DO DATASET À PUBLICAÇÃO
+
+---
+
+# 📌 OBJETIVO DO PROJETO
+
+Desenvolver um dashboard analítico completo no Power BI utilizando dados históricos das Olimpíadas, aplicando:
+
+* ETL
+* Power Query
+* Modelagem Dimensional
+* DAX
+* Storytelling
+* KPIs
+* Dashboard Executivo
+* Navegação Analítica
+* UX/UI
+* Publicação Profissional
+
+---
+
+# 🛠️ TECNOLOGIAS UTILIZADAS
+
+* Power BI Desktop
+* Power Query
+* DAX
+* GitHub
+* GitHub Projects
+* Power BI Service
+
+---
+
+# 📁 ESTRUTURA DO REPOSITÓRIO
+
+```text id="f84n4x"
+/dataset
+/powerbi
+/documentacao
+/imagens
+/dax
+/modelagem
+README.md
+```
+
+---
+
+# 🚀 ETAPA 1 — IMPORTAÇÃO DO DATASET
+
+## Importar CSV
+
+No Power BI Desktop:
+
+```text id="m2f6qy"
+Página Inicial → Obter Dados → Texto/CSV
+```
+
+Selecionar:
+
+```text id="t7q2vn"
+veriseti_20220203_olimpiyatlar(3).csv
+```
+
+⚠️ Importante:
+
+Selecionar:
+
+```text id="z6v4wb"
+Transformar Dados
+```
+
+NÃO selecionar:
+
+```text id="c9x3pr"
+Carregar
+```
+
+---
+
+# ⚙️ ETAPA 2 — POWER QUERY (ETL)
+
+# 🧹 Remover Tipagem Automática
+
+No painel:
+
+```text id="s8d5jl"
+Etapas Aplicadas
+```
+
+Excluir:
+
+```text id="u1f7kp"
+Tipo Alterado
+```
+
+---
+
+# 🏷️ Renomear Colunas
+
+| Original | Novo Nome   |
+| -------- | ----------- |
+| ID       | Id_Atleta   |
+| Name     | Nome_Atleta |
+| Sex      | Sexo        |
+| Age      | Idade       |
+| Height   | Altura      |
+| Weight   | Peso        |
+| Team     | Equipe      |
+| NOC      | Codigo_Pais |
+| Games    | Jogos       |
+| Year     | Ano         |
+| Season   | Temporada   |
+| City     | Cidade      |
+| Sport    | Esporte     |
+| Event    | Evento      |
+| Medal    | Medalha     |
+
+---
+
+# ✨ Limpeza Textual
+
+## Remover Espaços
+
+```text id="y5b1qt"
+Transformar → Formatar → Remover Espaços
+```
+
+## Capitalização
+
+```text id="w3k9cm"
+Transformar → Formatar → Cada Palavra em Maiúscula
+```
+
+---
+
+# 🌍 Padronização de Países
+
+Substituir manualmente:
+
+* USA
+* U.S.A
+* United States
+
+Por:
+
+```text id="r2m6zx"
+United States
+```
+
+---
+
+# 🚨 Tratamento de Valores Nulos
+
+| Coluna  | Estratégia         |
+| ------- | ------------------ |
+| Medalha | null → Sem Medalha |
+| Idade   | manter null        |
+| Altura  | manter null        |
+| Peso    | manter null        |
+
+⚠️ Nunca substituir:
+
+```text id="n8v2fa"
+null → 0
+```
+
+---
+
+# 🔍 Identificação de Erros
+
+```text id="h7q5dr"
+Página Inicial → Manter Erros
+```
+
+Corrigir:
+
+* NA
+* espaços vazios
+* caracteres inválidos
+
+Substituir por:
+
+```text id="x4j8pt"
+null
+```
+
+---
+
+# 🔢 Alteração dos Tipos
+
+| Coluna    | Tipo           |
+| --------- | -------------- |
+| Id_Atleta | Número Inteiro |
+| Ano       | Número Inteiro |
+| Idade     | Decimal        |
+| Altura    | Decimal        |
+| Peso      | Decimal        |
+| Medalha   | Texto          |
+
+---
+
+# 🏗️ Criação de Colunas Derivadas
+
+# Participou_Medalha
+
+```PowerQuery id="g6n2wp"
+if [Medalha] = "Sem Medalha"
+then "Não"
+else "Sim"
+```
+
+---
+
+# Faixa_Etaria
+
+```PowerQuery id="j4x9lt"
+if [Idade] = null then "Não Informado"
+else if [Idade] < 18 then "Jovem"
+else if [Idade] <= 25 then "Adulto Jovem"
+else if [Idade] <= 35 then "Adulto"
+else "Veterano"
+```
+
+---
+
+# Pontuacao_Medalha
+
+| Medalha     | Pontos |
+| ----------- | ------ |
+| Gold        | 3      |
+| Silver      | 2      |
+| Bronze      | 1      |
+| Sem Medalha | 0      |
+
+---
+
+# ⭐ ETAPA 3 — MODELAGEM DIMENSIONAL
+
+# 🎯 Modelo Estrela
+
+---
+
+# Tabela Fato
+
+## Fato_Olimpiadas
+
+Contém:
+
+* medalhas
+* atletas
+* eventos
+* métricas
+
+---
+
+# Tabelas Dimensão
+
+| Dimensão        | Conteúdo          |
+| --------------- | ----------------- |
+| Dim_Atleta      | Dados dos atletas |
+| Dim_Pais        | Países            |
+| Dim_Esporte     | Modalidades       |
+| Dim_Tempo       | Tempo             |
+| Dim_Localizacao | Cidades           |
+
+---
+
+# 🔗 Relacionamentos
+
+| Origem                       | Destino                 |
+| ---------------------------- | ----------------------- |
+| Fato_Olimpiadas[Id_Atleta]   | Dim_Atleta[Id_Atleta]   |
+| Fato_Olimpiadas[Codigo_Pais] | Dim_Pais[Codigo_Pais]   |
+| Fato_Olimpiadas[Esporte]     | Dim_Esporte[Esporte]    |
+| Fato_Olimpiadas[Ano]         | Dim_Tempo[Ano]          |
+| Fato_Olimpiadas[Cidade]      | Dim_Localizacao[Cidade] |
+
+---
+
+# 📊 ETAPA 4 — DAX
+
+# 🏅 Total Medalhas
+
+```DAX id="n5c2rx"
+Total Medalhas =
+COUNT(Fato_Olimpiadas[Medalha])
+```
+
+---
+
+# 🥇 Total Ouro
+
+```DAX id="p8w1fs"
+Total Ouro =
+CALCULATE(
+    COUNT(Fato_Olimpiadas[Medalha]),
+    Fato_Olimpiadas[Medalha] = "Gold"
+)
+```
+
+---
+
+# 👥 Total Atletas
+
+```DAX id="v2m9qk"
+Total Atletas =
+DISTINCTCOUNT(Fato_Olimpiadas[Id_Atleta])
+```
+
+---
+
+# 📊 Média Idade
+
+```DAX id="q4d7zb"
+Media Idade =
+AVERAGE(Fato_Olimpiadas[Idade])
+```
+
+---
+
+# 👩 Percentual Feminino
+
+```DAX id="f1x8yl"
+% Feminino =
+DIVIDE(
+    CALCULATE(
+        COUNTROWS(Fato_Olimpiadas),
+        Fato_Olimpiadas[Sexo]="F"
+    ),
+    COUNTROWS(Fato_Olimpiadas)
+)
+```
+
+---
+
+# 🌍 Total Países
+
+```DAX id="l9s5vn"
+Total Países =
+DISTINCTCOUNT(Fato_Olimpiadas[Codigo_Pais])
+```
+
+---
+
+# 🎨 ETAPA 5 — DASHBOARD
+
+# 📄 Página 1 — Dashboard Executivo
+
+## KPI Cards
+
+* Total Medalhas
+* Total Atletas
+* Média Idade
+* Total Países
+
+## Evolução Olímpica
+
+* gráfico linha
+* Ano no eixo X
+* Medalhas e Atletas
+
+## Medalhas por Tipo
+
+* gráfico rosca
+* Ouro
+* Prata
+* Bronze
+
+## Participação Feminina
+
+* coluna empilhada
+* Masculino x Feminino
+
+---
+
+# 📄 Página 2 — Países e Medalhas
+
+## Visuais
+
+* Top 10 Países
+* Mapa Mundial
+* Dispersão Eficiência Olímpica
+* Ranking Olímpico
+
+---
+
+# 📄 Página 3 — Atletas
+
+## Visuais
+
+* Altura x Peso
+* Média Idade por Esporte
+* Faixa Etária
+* Top Atletas
+
+---
+
+# 📄 Página 4 — Análise Feminina
+
+## Visuais
+
+* Evolução Feminina
+* Medalhas Femininas
+* Treemap Feminino
+
+---
+
+# 📄 Página 5 — Storytelling
+
+## Narrativas
+
+* Dominância dos EUA
+* Crescimento Feminino
+* Evolução Olímpica
+* Esportes Dominantes
+
+---
+
+# 🚀 ETAPA 6 — RECURSOS AVANÇADOS
+
+# Segmentadores
+
+Adicionar filtros:
+
+* Ano
+* País
+* Sexo
+* Esporte
+* Temporada
+
+---
+
+# Tooltips
+
+Exibir:
+
+* medalhas
+* atletas
+* médias
+
+---
+
+# Drill Through
+
+Criar detalhamento:
+
+* País
+* Atleta
+* Esporte
+
+---
+
+# Navegação
+
+Criar:
+
+* botões
+* ícones
+* navegação entre páginas
+
+---
+
+# 🎨 ETAPA 7 — UX/UI
+
+# Identidade Visual
+
+Definir:
+
+* paleta de cores
+* tipografia
+* espaçamento
+* hierarquia visual
+
+---
+
+# Layout
+
+Objetivos:
+
+* clareza
+* leitura intuitiva
+* visual executivo
+* organização analítica
+
+---
+
+# 📖 ETAPA 8 — STORYTELLING ANALÍTICO
+
+# Objetivo
+
+Transformar dados em narrativa visual.
+
+---
+
+# Insights
+
+## Países
+
+* dominância dos EUA
+* evolução histórica
+* eficiência olímpica
+
+## Participação Feminina
+
+* crescimento ao longo das décadas
+* esportes femininos dominantes
+
+## Evolução Olímpica
+
+* crescimento de atletas
+* crescimento de países
+* expansão dos esportes
+
+---
+
+# 🏁 ETAPA 9 — OTIMIZAÇÃO
+
+# Modelo
+
+* remover colunas desnecessárias
+* revisar cardinalidade
+* revisar relacionamentos
+
+---
+
+# DAX
+
+* otimizar medidas
+* revisar cálculos pesados
+* reduzir processamento
+
+---
+
+# Dashboard
+
+* revisar tempo de carregamento
+* reduzir excesso visual
+* revisar experiência do usuário
+
+---
+
+# 🌐 ETAPA 10 — PUBLICAÇÃO
+
+# Power BI Service
+
+## Publicar
+
+```text id="d7w2rm"
+Página Inicial → Publicar
+```
+
+Selecionar workspace.
+
+---
+
+# GitHub
+
+## Atualizar README
+
+Adicionar:
+
+* objetivo
+* screenshots
+* tecnologias
+* insights
+* link Power BI
+
+---
+
+# LinkedIn
+
+Publicar:
+
+* screenshots
+* aprendizados
+* insights analíticos
+* storytelling do projeto
+
+---
+
+# 📌 RESULTADO FINAL
+
+O projeto entregará:
+
+* Dashboard profissional
+* ETL completo
+* Modelo estrela
+* KPIs executivos
+* Storytelling analítico
+* Navegação dinâmica
+* UX/UI profissional
+* Projeto forte para portfólio
+* Case profissional Power BI
+
+---
+
+# 🏆 CONCLUSÃO
+
+Este projeto demonstra competências completas em:
+
+* BI
+* Analytics
+* ETL
+* Power Query
+* DAX
+* Data Modeling
+* UX para dashboards
+* Storytelling analítico
+* Governança de dados
+* Visualização estratégica
