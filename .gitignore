@@ -35,12 +35,12 @@ Desenvolver um dashboard analítico completo no Power BI utilizando dados histó
 # 📁 ESTRUTURA DO REPOSITÓRIO
 
 ```text id="f84n4x"
-/dataset
-/powerbi
-/documentacao
-/imagens
-/dax
-/modelagem
+/Dataset
+/Powerbi
+/Documentacao
+/Imagens
+/Dax
+/Modelagem
 README.md
 ```
 
